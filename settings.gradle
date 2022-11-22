@@ -15,4 +15,13 @@ dependencyResolutionManagement {
 rootProject.name = "Multi Module Android App"
 include ':app'
 include ':lib'
+include ':hero'
+include ':hero:hero-datasource'
+include ':hero:hero-datasource-tests'
+include ':hero:hero-domain'
+include ':hero:hero-interactors'
+include ':hero:ui-heroList'
+include ':hero:ui-heroDetail'
+
 include ':constants'
+include ':component'

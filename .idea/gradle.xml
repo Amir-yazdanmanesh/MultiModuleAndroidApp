@@ -12,7 +12,15 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/component" />
             <option value="$PROJECT_DIR$/constants" />
+            <option value="$PROJECT_DIR$/hero" />
+            <option value="$PROJECT_DIR$/hero/hero-datasource" />
+            <option value="$PROJECT_DIR$/hero/hero-datasource-tests" />
+            <option value="$PROJECT_DIR$/hero/hero-domain" />
+            <option value="$PROJECT_DIR$/hero/hero-interactors" />
+            <option value="$PROJECT_DIR$/hero/ui-heroDetail" />
+            <option value="$PROJECT_DIR$/hero/ui-heroList" />
             <option value="$PROJECT_DIR$/lib" />
           </set>
         </option>

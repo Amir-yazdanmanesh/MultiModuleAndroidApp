@@ -16,7 +16,7 @@ android {
         targetSdk = Android.targetSdk
         versionCode = Android.versionCode
         versionName = Android.versionName
-        testInstrumentationRunner = "com.codingwithmitch.dotainfo.CustomTestRunner"
+        testInstrumentationRunner = "com.yazdanmanesh.multimodule.CustomTestRunner"
     }
 
     buildTypes {
