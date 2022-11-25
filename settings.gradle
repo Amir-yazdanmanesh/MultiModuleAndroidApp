@@ -16,6 +16,7 @@ rootProject.name = "Multi Module Android App"
 include ':app'
 include ':lib'
 include ':hero'
+include ':core'
 include ':hero:hero-datasource'
 include ':hero:hero-datasource-tests'
 include ':hero:hero-domain'
