@@ -41,7 +41,7 @@ fun getHeroAttrFromUiValue(uiValue: String): HeroAttribute{
     }
 }
 
-fun getHeroAttrFromAbreviation(abbreviation: String): HeroAttribute{
+fun getHeroAttrFromAbbreviation(abbreviation: String): HeroAttribute{
     return when(abbreviation){
         HeroAttribute.Agility.abbreviation -> {
             HeroAttribute.Agility
