@@ -18,5 +18,7 @@ class HeroInteractions(
                 )
             )
         }
+        val schema = HeroCache.schema()
+        val dbName = HeroCache.dbName()
     }
 }

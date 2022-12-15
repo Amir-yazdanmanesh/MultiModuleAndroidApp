@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.yazdanmanesh.core.DataState
 import com.yazdanmanesh.core.Logger
 import com.yazdanmanesh.core.ProgressBarState
@@ -35,7 +36,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val getHeroes = HeroInteractions.build().getHeroes
+        val getHeroes = HeroInteractions.build(
+            sqlDriver = AndroidSqliteDriver(
+                schema = HeroInteractions.schema,
+                context = this,
+                name = HeroInteractions.dbName
+            )
+        ).getHeroes
         val logger = Logger(tag = "Get Heroes Test")
         getHeroes.execute().onEach { dataState ->
             when (dataState) {
