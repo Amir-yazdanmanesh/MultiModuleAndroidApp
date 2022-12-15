@@ -1,6 +1,7 @@
 package com.yazdanmanesh.multimoduleapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -23,19 +24,27 @@ import com.yazdanmanesh.core.UIComponent
 import com.yazdanmanesh.hero_domain.Hero
 import com.yazdanmanesh.hero_interactors.HeroInteractions
 import com.yazdanmanesh.multimoduleapp.ui.theme.MultiModuleAndroidAppTheme
+import com.yazdanmanesh.ui_heroList.HeroList
+import com.yazdanmanesh.ui_heroList.HeroListState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import coil.ImageLoader
 
 class MainActivity : ComponentActivity() {
-    private val heroes: MutableState<List<Hero>> = mutableStateOf(listOf())
+    private val state: MutableState<HeroListState> = mutableStateOf(HeroListState())
     private val progressBarState: MutableState<ProgressBarState> =
         mutableStateOf(ProgressBarState.Idle)
-
+    private lateinit var imageLoader:ImageLoader
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        imageLoader = ImageLoader.Builder(applicationContext)
+            .error(R.drawable.error_image)
+            .placeholder(R.drawable.white_background)
+            .availableMemoryPercentage(0.25)
+            .crossfade(true)
+            .build()
         val getHeroes = HeroInteractions.build(
             sqlDriver = AndroidSqliteDriver(
                 schema = HeroInteractions.schema,
@@ -57,7 +66,8 @@ class MainActivity : ComponentActivity() {
                     }
                 }
                 is DataState.Data -> {
-                    heroes.value = dataState.data ?: listOf()
+                    Log.e("moz", "${dataState.data} " )
+                    state.value = state.value.copy(heroes = dataState.data?: listOf())
                 }
 
                 is DataState.Loading -> {
@@ -67,19 +77,10 @@ class MainActivity : ComponentActivity() {
         }.launchIn(CoroutineScope(IO))
         setContent {
             MultiModuleAndroidAppTheme {
-
-                Box(modifier = Modifier.fillMaxSize()) {
-                    LazyColumn(modifier = Modifier.fillMaxSize()) {
-                        items(heroes.value) { hero ->
-                            Text(text = hero.localizedName)
-                        }
-                    }
-                    if (progressBarState.value is ProgressBarState.Loading)
-                    {
-                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-
-                    }
-                }
+                HeroList(
+                    state = state.value,
+                    imageLoader = imageLoader
+                )
             }
         }
     }

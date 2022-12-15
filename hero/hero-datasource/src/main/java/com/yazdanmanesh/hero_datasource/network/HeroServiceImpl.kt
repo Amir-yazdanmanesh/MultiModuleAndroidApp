@@ -12,7 +12,9 @@ class HeroServiceImpl(
     override suspend fun getHeroStats(): List<Hero> {
         return httpClient.get<List<HeroDto>>{
             url(EndPoints.HERO_STATS)
-        }.map { it.toHero() }
+        }.map {
+            it.toHero()
+        }
     }
 
 }
