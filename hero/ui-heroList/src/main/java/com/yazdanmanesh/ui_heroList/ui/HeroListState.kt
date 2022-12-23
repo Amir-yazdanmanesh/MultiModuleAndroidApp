@@ -1,4 +1,4 @@
-package com.yazdanmanesh.ui_heroList
+package com.yazdanmanesh.ui_heroList.ui
 
 import com.yazdanmanesh.core.ProgressBarState
 import com.yazdanmanesh.hero_domain.Hero
