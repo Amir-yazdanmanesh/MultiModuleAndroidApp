@@ -14,14 +14,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class HeroListViewModel @Inject
 constructor(
-    private val getHeroes: GetHeroes
+    private val getHeroes: GetHeroes,
+    private @Named("heroListLogger") val logger:Logger,
 ) : ViewModel() {
     val state: MutableState<HeroListState> = mutableStateOf(HeroListState())
-    val logger = Logger(tag = "HeroListViewModel")
 
     init {
         getHeroes()
@@ -41,7 +42,6 @@ constructor(
                     }
                 }
                 is DataState.Data -> {
-                    Log.e("moz", "${dataState.data} ")
                     state.value = state.value.copy(heroes = dataState.data ?: listOf())
                 }
 
