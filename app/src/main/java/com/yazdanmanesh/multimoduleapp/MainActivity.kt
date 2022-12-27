@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
 
     private fun NavGraphBuilder.addHeroDetail() {
         composable(
-            route = Screen.HeroDetail.route + "/heroId",
+            route = Screen.HeroDetail.route + "/{heroId}",
             arguments = Screen.HeroDetail.arguments
         ) { navBackStackEntry ->
             HeroDetail(
