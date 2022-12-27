@@ -19,17 +19,19 @@ class GetHeroes(
             val heroes: List<Hero> = try {
                 service.getHeroStats()
             } catch (e: Exception) {
-                DataState.Response<List<Hero>>(
+                e.printStackTrace() // log to crashlytics?
+                emit(DataState.Response<List<Hero>>(
                     uiComponent = UIComponent.Dialog(
-                        title = "Error",
-                        description = e.message ?: "Unknown Error"
+                        title = "Network Data Error",
+                        description = e.message?: "Unknown error"
                     )
-                )
+                ))
                 listOf()
             }
             cache.insert(heroes)
+            val cachedHeroes = cache.selectAll()
 
-            emit(DataState.Data(heroes))
+            emit(DataState.Data(cachedHeroes))
         } catch (e: Exception) {
             emit(
                 DataState.Response<List<Hero>>(

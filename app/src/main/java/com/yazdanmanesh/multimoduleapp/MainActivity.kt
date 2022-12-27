@@ -7,6 +7,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -33,34 +35,42 @@ class MainActivity : ComponentActivity() {
                 NavHost(navController = navController,
                     startDestination = Screen.HeroList.route,
                     builder = {
-                        composable(
-                            route = Screen.HeroList.route
-                        ) {
-                            val viewModel: HeroListViewModel = hiltViewModel()
-                            HeroList(
-                                state = viewModel.state.value,
-                                imageLoader = imageLoader,
-                                navigateToDetailScreen ={ heroId ->
-                                    navController.navigate(
-                                        "${Screen.HeroDetail.route}/$heroId"
-                                    )
-                                }
-                            )
-                        }
+                        addHeroList(navController)
 
-                        composable(
-                            route = Screen.HeroDetail.route+"/heroId",
-                            arguments = Screen.HeroDetail.arguments
-                        ) { navBackStackEntry ->
-                            HeroDetail(
-                                heroId = navBackStackEntry.arguments?.getInt("heroId")
-                            )
-                        }
+                        addHeroDetail()
 
                     }
                 )
 
             }
+        }
+    }
+
+    private fun NavGraphBuilder.addHeroDetail() {
+        composable(
+            route = Screen.HeroDetail.route + "/heroId",
+            arguments = Screen.HeroDetail.arguments
+        ) { navBackStackEntry ->
+            HeroDetail(
+                heroId = navBackStackEntry.arguments?.getInt("heroId")
+            )
+        }
+    }
+
+    private fun NavGraphBuilder.addHeroList(navController: NavHostController) {
+        composable(
+            route = Screen.HeroList.route
+        ) {
+            val viewModel: HeroListViewModel = hiltViewModel()
+            HeroList(
+                state = viewModel.state.value,
+                imageLoader = imageLoader,
+                navigateToDetailScreen = { heroId ->
+                    navController.navigate(
+                        "${Screen.HeroDetail.route}/$heroId"
+                    )
+                }
+            )
         }
     }
 }

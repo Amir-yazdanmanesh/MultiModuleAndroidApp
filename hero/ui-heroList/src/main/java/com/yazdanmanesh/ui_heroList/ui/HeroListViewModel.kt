@@ -4,11 +4,13 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.yazdanmanesh.core.DataState
 import com.yazdanmanesh.core.Logger
 import com.yazdanmanesh.core.UIComponent
 import com.yazdanmanesh.hero_interactors.GetHeroes
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
@@ -27,7 +29,7 @@ constructor(
     init {
         onTriggerEvent(HeroListEvents.GetHeroes)
     }
-    fun onTriggerEvent(events: HeroListEvents){
+    private fun onTriggerEvent(events: HeroListEvents){
         when(events){
             is HeroListEvents.GetHeroes ->{
                 getHeroes()
@@ -56,7 +58,7 @@ constructor(
                     state.value = state.value.copy(progressBarState = dataState.progressBarState)
                 }
             }
-        }.launchIn(CoroutineScope(Dispatchers.IO))
+        }.launchIn(viewModelScope)
 
     }
 }

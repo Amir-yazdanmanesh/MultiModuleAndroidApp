@@ -18,7 +18,6 @@ fun HeroList(
     imageLoader: ImageLoader,
     navigateToDetailScreen:(Int) -> Unit,
 ) {
-
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(state.heroes) { hero ->
