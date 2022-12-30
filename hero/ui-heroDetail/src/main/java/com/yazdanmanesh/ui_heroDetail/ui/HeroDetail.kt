@@ -1,4 +1,4 @@
-package com.yazdanmanesh.ui_heroDetail
+package com.yazdanmanesh.ui_heroDetail.ui
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

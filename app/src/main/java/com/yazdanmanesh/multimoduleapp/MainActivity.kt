@@ -14,8 +14,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import coil.ImageLoader
 import com.yazdanmanesh.multimoduleapp.ui.theme.MultiModuleAndroidAppTheme
-import com.yazdanmanesh.ui_heroDetail.HeroDetail
-import com.yazdanmanesh.ui_heroDetail.Screen
+import com.yazdanmanesh.ui_heroDetail.ui.HeroDetail
+import com.yazdanmanesh.ui_heroDetail.ui.Screen
 import com.yazdanmanesh.ui_heroList.ui.HeroList
 import com.yazdanmanesh.ui_heroList.ui.HeroListViewModel
 import dagger.hilt.android.AndroidEntryPoint

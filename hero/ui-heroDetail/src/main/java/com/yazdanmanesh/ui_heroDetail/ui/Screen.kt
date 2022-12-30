@@ -1,4 +1,4 @@
-package com.yazdanmanesh.ui_heroDetail
+package com.yazdanmanesh.ui_heroDetail.ui
 
 import androidx.navigation.NavType
 import androidx.navigation.compose.NamedNavArgument
@@ -8,12 +8,12 @@ sealed class Screen(
     val route:String,
     val arguments:List<NamedNavArgument>
 ) {
-    object HeroList:Screen(
+    object HeroList: Screen(
         route = "heroList",
         arguments = emptyList()
     )
 
-    object HeroDetail:Screen(
+    object HeroDetail: Screen(
         route = "heroDetail",
         arguments = listOf(
             navArgument("heroId"){

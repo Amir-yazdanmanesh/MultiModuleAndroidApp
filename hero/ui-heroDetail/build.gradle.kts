@@ -3,7 +3,5 @@ apply {
 }
 
 dependencies{
-
-
-
+"implementation"(project(Modules.heroInteractors))
 }
