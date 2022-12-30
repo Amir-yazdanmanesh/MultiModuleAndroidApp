@@ -5,7 +5,8 @@ import com.yazdanmanesh.hero_datasource.cache.HeroCache
 import com.yazdanmanesh.hero_datasource.network.HeroService
 
 class HeroInteractions(
-    val getHeroes: GetHeroes
+    val getHeroes: GetHeroes,
+    val getHeroFromCache: GetHeroFromCache,
 ) {
     companion object Factory {
         fun build(sqlDriver: SqlDriver): HeroInteractions {
@@ -15,9 +16,13 @@ class HeroInteractions(
                 getHeroes = GetHeroes(
                     service = service,
                     cache = cache
-                )
+                ),
+                getHeroFromCache = GetHeroFromCache(
+                    cache = cache
+                ),
             )
         }
+
         val schema = HeroCache.schema()
         val dbName = HeroCache.dbName()
     }
