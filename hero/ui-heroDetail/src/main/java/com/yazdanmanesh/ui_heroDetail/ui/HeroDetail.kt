@@ -5,7 +5,9 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun HeroDetail(
-    heroId:Int?,
+    heroDetailState: HeroDetailState,
 ){
-    Text(text = "Hero id: $heroId")
+    heroDetailState.hero?.let { hero ->
+        Text(text = "${hero.localizedName}")
+}?: Text(text = "LOADING...")
 }

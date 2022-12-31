@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.ImageLoader
 import com.yazdanmanesh.multimoduleapp.ui.theme.MultiModuleAndroidAppTheme
 import com.yazdanmanesh.ui_heroDetail.ui.HeroDetail
+import com.yazdanmanesh.ui_heroDetail.ui.HeroDetailViewModel
 import com.yazdanmanesh.ui_heroDetail.ui.Screen
 import com.yazdanmanesh.ui_heroList.ui.HeroList
 import com.yazdanmanesh.ui_heroList.ui.HeroListViewModel
@@ -51,9 +52,8 @@ class MainActivity : ComponentActivity() {
             route = Screen.HeroDetail.route + "/{heroId}",
             arguments = Screen.HeroDetail.arguments
         ) { navBackStackEntry ->
-            HeroDetail(
-                heroId = navBackStackEntry.arguments?.getInt("heroId")
-            )
+            val viewModel: HeroDetailViewModel = hiltViewModel()
+            HeroDetail(heroDetailState = viewModel.state.value)
         }
     }
 
